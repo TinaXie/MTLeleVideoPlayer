@@ -25,6 +25,7 @@
 
 - (void)playNext {
     if (self.dataList.count == 0 || self.currentIndex >= self.dataList.count) {
+        [self dismissViewControllerAnimated:YES completion:nil];
         return;
     }
     NSLog(@"====playNext[%ld]", (long)self.currentIndex);
@@ -39,7 +40,7 @@
 - (void)playFinish {
     self.currentIndex ++;
     NSLog(@"===video finish!!!");
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self playNext];
     });
 
