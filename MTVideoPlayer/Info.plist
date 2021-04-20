@@ -62,5 +62,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>允许使用你的多媒体么？</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>允许访问相册？</string>
 </dict>
 </plist>

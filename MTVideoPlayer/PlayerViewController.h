@@ -6,10 +6,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVKit/AVKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PlayerViewController : UIViewController
+@interface PlayerViewController : AVPlayerViewController
+
+@property (nonatomic, strong) NSMutableArray *dataList;
 
 @end
 

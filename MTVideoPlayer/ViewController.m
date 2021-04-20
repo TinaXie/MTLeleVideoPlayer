@@ -6,8 +6,14 @@
 //
 
 #import "ViewController.h"
+#import <Photos/Photos.h>
+#import <AssetsLibrary/AssetsLibrary.h>
+#import "PlayerViewController.h"
 
 @interface ViewController ()
+
+@property (nonatomic, strong) NSMutableArray *dataList;
+
 
 @end
 
@@ -15,8 +21,99 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.dataList = [NSMutableArray array];
+    [self loadAllVideo];
+}
+
+- (IBAction)showVideo:(id)sender {
+    if (self.dataList.count == 0) {
+        return;
+    }
+    PlayerViewController *playVC = [[PlayerViewController alloc] init];
+    playVC.dataList = self.dataList;
+    [self presentViewController:playVC animated:YES completion:nil];
+    
+}
+
+
+- (void)loadAllVideo {
+    //系统
+    PHFetchResult *smartAlbums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
+    
+    for (PHAssetCollection *collection in smartAlbums) {
+            //遍历获取相册
+            if ([collection estimatedAssetCount] > 0) {
+                if (![collection.localizedTitle isEqualToString:@"Recents"]) {
+                    continue;
+                }
+                //获取当前相册里所有的PHAsset，也就是图片或者视频
+                PHFetchResult *fetchResult = [PHAsset fetchAssetsInAssetCollection:collection options:nil];
+                for (NSInteger j = 0; j < fetchResult.count; j++) {
+                    //从相册中取出照片
+                    PHAsset *asset = fetchResult[j];
+                    if (asset.mediaType == PHAssetMediaTypeImage) {
+                       //得到一个图片类型资源
+                    }else if (asset.mediaType == PHAssetMediaTypeVideo) {
+                        //得到一个视频类型资源
+                        [self getVideoPathFromPHAsset:asset Complete:^(NSURL *videoURL, NSString *dTime) {
+                            [self.dataList insertObject:videoURL atIndex:0];
+                        }];
+                    } else if (asset.mediaType == PHAssetMediaTypeAudio) {
+                          //音频，PHAsset的mediaType属性有三个枚举值，笔者对PHAssetMediaTypeAudio暂时没有进行处理
+                   }
+                }
+              }
+        }
+}
+
+
+//获取视频本地地址及时长
+- (void)getVideoPathFromPHAsset:(PHAsset *)phAsset Complete:(void (^)(NSURL *videoURL,NSString *dTime))result {
+    PHVideoRequestOptions *options = [[PHVideoRequestOptions alloc] init];
+    options.version = PHImageRequestOptionsVersionCurrent;
+    options.deliveryMode = PHVideoRequestOptionsDeliveryModeAutomatic;
+    options.networkAccessAllowed = YES;
+
+    [[PHImageManager defaultManager] requestAVAssetForVideo:phAsset options:options resultHandler:^(AVAsset * _Nullable asset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info) {
+        
+        CMTime   time = [asset duration];
+        int seconds = ceil(time.value/time.timescale);
+        //format of minute
+        NSString *str_minute = [NSString stringWithFormat:@"%d",seconds/60];
+        //format of second
+        NSString *str_second = [NSString stringWithFormat:@"%.2d",seconds%60];
+        //format of time
+        NSString *format_time = [NSString stringWithFormat:@"%@:%@",str_minute,str_second];
+
+        //video路径获取
+        if (asset && [asset isKindOfClass:[AVURLAsset class]]) {
+            AVURLAsset *urlAsset = (AVURLAsset *)asset;
+            NSURL *videoURL = urlAsset.URL;
+            result(videoURL,format_time);
+        }
+    }];
+}
+
+- (void)getVideoImageFromPHAsset:(PHAsset *)asset Complete:(void (^)(UIImage *image))resultBack{
+    
+    PHImageRequestOptions *option = [[PHImageRequestOptions alloc] init];
+    option.resizeMode = PHImageRequestOptionsResizeModeFast;
+    
+    [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:CGSizeMake(200, 200) contentMode:PHImageContentModeDefault options:option resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+        UIImage *iamge = result;
+        resultBack(iamge);
+    }];
+}
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"gotoPlay"]) {
+        PlayerViewController *playVC = segue.destinationViewController;
+        playVC.dataList = self.dataList;
+        NSLog(@"====video count===%ld", self.dataList.count);
+    }
 }
 
 
 @end
+

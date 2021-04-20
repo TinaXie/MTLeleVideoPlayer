@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A250DF57262EC49F003E89C7 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A250DF56262EC49F003E89C7 /* AVKit.framework */; };
 		A27268D9262EAA7A00BEC55D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A27268D8262EAA7A00BEC55D /* AppDelegate.m */; };
 		A27268DC262EAA7A00BEC55D /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A27268DB262EAA7A00BEC55D /* SceneDelegate.m */; };
 		A27268DF262EAA7A00BEC55D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A27268DE262EAA7A00BEC55D /* ViewController.m */; };
@@ -14,9 +15,11 @@
 		A27268E4262EAA7C00BEC55D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A27268E3262EAA7C00BEC55D /* Assets.xcassets */; };
 		A27268E7262EAA7C00BEC55D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A27268E5262EAA7C00BEC55D /* LaunchScreen.storyboard */; };
 		A27268EA262EAA7C00BEC55D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A27268E9262EAA7C00BEC55D /* main.m */; };
+		A27268F5262EB35B00BEC55D /* PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A27268F4262EB35B00BEC55D /* PlayerViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A250DF56262EC49F003E89C7 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		A27268D4262EAA7A00BEC55D /* MTVideoPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MTVideoPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A27268D7262EAA7A00BEC55D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A27268D8262EAA7A00BEC55D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -29,6 +32,8 @@
 		A27268E6262EAA7C00BEC55D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A27268E8262EAA7C00BEC55D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A27268E9262EAA7C00BEC55D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A27268F3262EB35B00BEC55D /* PlayerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerViewController.h; sourceTree = "<group>"; };
+		A27268F4262EB35B00BEC55D /* PlayerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,17 +41,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A250DF57262EC49F003E89C7 /* AVKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A250DF55262EC49F003E89C7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A250DF56262EC49F003E89C7 /* AVKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A27268CB262EAA7A00BEC55D = {
 			isa = PBXGroup;
 			children = (
 				A27268D6262EAA7A00BEC55D /* MTVideoPlayer */,
 				A27268D5262EAA7A00BEC55D /* Products */,
+				A250DF55262EC49F003E89C7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +82,8 @@
 				A27268DB262EAA7A00BEC55D /* SceneDelegate.m */,
 				A27268DD262EAA7A00BEC55D /* ViewController.h */,
 				A27268DE262EAA7A00BEC55D /* ViewController.m */,
+				A27268F3262EB35B00BEC55D /* PlayerViewController.h */,
+				A27268F4262EB35B00BEC55D /* PlayerViewController.m */,
 				A27268E0262EAA7A00BEC55D /* Main.storyboard */,
 				A27268E3262EAA7C00BEC55D /* Assets.xcassets */,
 				A27268E5262EAA7C00BEC55D /* LaunchScreen.storyboard */,
@@ -149,6 +166,7 @@
 				A27268D9262EAA7A00BEC55D /* AppDelegate.m in Sources */,
 				A27268EA262EAA7C00BEC55D /* main.m in Sources */,
 				A27268DC262EAA7A00BEC55D /* SceneDelegate.m in Sources */,
+				A27268F5262EB35B00BEC55D /* PlayerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +312,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 77MMW6NR5H;
 				INFOPLIST_FILE = MTVideoPlayer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -312,6 +331,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 77MMW6NR5H;
 				INFOPLIST_FILE = MTVideoPlayer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
