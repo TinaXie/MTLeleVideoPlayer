@@ -16,6 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray<MTPhotoVideoItem *> *dataList;
 @property (nonatomic, assign) NSInteger currentIndex;
 
+
+//开始播放视频
+- (void)playNext;
+
 @end
 
 NS_ASSUME_NONNULL_END

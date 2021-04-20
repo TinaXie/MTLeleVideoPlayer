@@ -56,7 +56,9 @@
     PlayerViewController *playVC = [[PlayerViewController alloc] init];
     playVC.dataList = self.dataList;
     playVC.currentIndex = currentIndex;
-    [self presentViewController:playVC animated:YES completion:nil];
+    [self presentViewController:playVC animated:YES completion:^{
+        [playVC playNext];
+    }];
 }
 
 #pragma mark - UICollectionViewDataSource

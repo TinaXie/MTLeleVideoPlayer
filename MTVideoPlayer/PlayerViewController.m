@@ -19,7 +19,6 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playFinish) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     
-    [self playNext];
 }
 
 
