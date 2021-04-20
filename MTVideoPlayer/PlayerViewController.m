@@ -10,9 +10,6 @@
 @interface PlayerViewController ()
 <AVPlayerViewControllerDelegate>
 
-//@property (nonatomic, strong) AVPlayer *avPlayer;
-@property (nonatomic, assign) int currentIndex;
-
 @end
 
 @implementation PlayerViewController
@@ -30,9 +27,10 @@
     if (self.dataList.count == 0 || self.currentIndex >= self.dataList.count) {
         return;
     }
-    
-    NSURL *url = [self.dataList objectAtIndex:self.currentIndex];
-    AVPlayer *player = [AVPlayer playerWithURL:url];
+    NSLog(@"====playNext[%ld]", (long)self.currentIndex);
+
+    MTPhotoVideoItem *item = [self.dataList objectAtIndex:self.currentIndex];
+    AVPlayer *player = [AVPlayer playerWithURL:item.url];
     self.player = player;
     [self.player play];
 }
